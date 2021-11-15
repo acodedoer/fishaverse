@@ -13,7 +13,7 @@
     <title>Fishaverse</title>
   </head>
   <body>
-    <a-scene  stats id="scene" environment="preset: starry;" >
+    <a-scene  stats id="scene" >
         <a-assets>
           <a-asset-item id="fish1-model" src="assets/models/fish1.glb"></a-asset-item>
           <a-asset-item id="mantaray-model" src="assets/models/mantaray.glb"></a-asset-item>
@@ -42,7 +42,7 @@
         <a-entity boids="agent:fish3;turnFactor:0.005;avoidFactor:0.005; population:100;minSeparation:1;" ></a-entity>
         <a-entity boids="agent:fish2;turnFactor:0.005;avoidFactor:0.005; population:40;minSeparation:2;" ></a-entity>-->
         
-
+        <a-entity hide-in-ar-mode environment="preset: starry;"></a-entity>
         <a-entity boids="agent:shark; population:1; turnFactor:0.0005;posXLimit:20; negXLimit:-20; posYLimit: 10; negYLimit: 5; posZLimit: 20; negZLimit:-20;predatorLevel:9" ></a-entity>
 
         <a-entity boids="agent:whale; population:1; turnFactor:0.0005;posXLimit:50; negXLimit:-50; posYLimit: 50; negYLimit: -5; posZLimit: 50; negZLimit:-50;predatorLevel:10" ></a-entity> 

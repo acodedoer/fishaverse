@@ -198,3 +198,18 @@ AFRAME.registerComponent('illuminate', {
         this.el.object3D.add(sprite);
     }
   });
+
+  AFRAME.registerComponent('hide-in-ar-mode', {
+    // Set this object invisible while in AR mode.
+    init: function () {
+        this.el.sceneEl.addEventListener('enter-vr', (ev) => {
+            this.wasVisible = this.el.getAttribute('visible');
+            if (this.el.sceneEl.is('ar-mode')) {
+                this.el.setAttribute('visible', false);
+            }
+        });
+        this.el.sceneEl.addEventListener('exit-vr', (ev) => {
+            if (this.wasVisible) this.el.setAttribute('visible', true);
+        });
+    }
+});
