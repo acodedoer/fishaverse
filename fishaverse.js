@@ -1,3 +1,12 @@
+AFRAME.registerComponent('hardground', {
+    init: function(){
+        const ground = document.createElement("a-plane");
+        ground.object3D.rotation.x =Math.PI/2;
+        ground.setAttribute("scale", "10 10 10í");
+        document.querySelector("a-scene").appendChild(ground);
+        
+    },
+})
 AFRAME.registerComponent('boids', {
     schema: {
         agent:{type: 'string', default: ""},
@@ -35,6 +44,10 @@ AFRAME.registerComponent('boids', {
             boid.object3D.position.x=this.getRandom(this.data.negXLimit, this.data.posXLimit);
             boid.object3D.position.y=this.getRandom(this.data.negYLimit, this.data.posYLimit);
             boid.object3D.position.z=this.getRandom(this.data.negZLimit, this.data.posZLimit);
+            const scale = this.getRandom(0.5, 1.5);
+            boid.object3D.scale.x = scale;
+            boid.object3D.scale.y = scale;
+            boid.object3D.scale.z = scale;
             this.boids[i] = {
                 el: boid,
                 dx: Math.random(),
@@ -44,7 +57,6 @@ AFRAME.registerComponent('boids', {
             };
             document.querySelector("a-scene").appendChild(boid);
             this.predators = document.querySelectorAll(".predator")
-            console.log(this.predators)
         }
     },
 
@@ -64,6 +76,9 @@ AFRAME.registerComponent('boids', {
             dir.multiplyScalar(10);
             dir.add(boid.el.object3D.position);
             boid.el.object3D.lookAt(dir);
+            boid.el.setAttribute("data-velocity-x",`${dir.x}`)
+            boid.el.setAttribute("data-velocity-y",`${dir.y}`)
+            boid.el.setAttribute("data-velocity-z",`${dir.z}`)
         });
     },
 
@@ -144,8 +159,10 @@ AFRAME.registerComponent('boids', {
 
         [...this.predators].forEach(predator => { 
             if(boid.el.object3D.position.distanceTo(predator.object3D.position)<5){
-                
-                velocity.multiplyScalar(-1);
+                const predatorDir = new THREE.Vector3(predator.getAttribute('data-velocity-x'), predator.getAttribute('data-velocity-y'), predator.getAttribute('data-velocity-z'));
+                const oldV = velocity.clone();
+                velocity.cross(predatorDir)
+                velocity.add(oldV)
             }
         });
         
@@ -167,12 +184,14 @@ AFRAME.registerComponent('boids', {
 
 AFRAME.registerComponent('illuminate', {
     schema: {
-      matColor:{type: 'color', default: '#ff0000'},
-      glowColor:{type:'color', default:'#ffff00'},
-      matOpacity: {type:'number', default:0.5},
-      glowOpacity: {type:'number', default:0.5},
-      matIntensity: {type:'number', default:1},
-      glowScalar: {type:'number', default:1},
+        glow: {type:'boolean', default: 'true'},
+        matColor:{type: 'color', default: '#ff0000'},
+        glowColor:{type:'color', default:'#ffff00'},
+        matOpacity: {type:'number', default:0.5},
+        glowOpacity: {type:'number', default:0.5},
+        matIntensity: {type:'number', default:1},
+        glowScalar: {type:'number', default:1},
+        light: {type:'boolean', default:false}
     },
     init: function () {
         this.el.addEventListener('model-loaded', () => {
@@ -189,13 +208,15 @@ AFRAME.registerComponent('illuminate', {
             );
         });
         
-        const texture = new THREE.TextureLoader().load( 'assets/sprites/glow.png' );
-        const material = new THREE.SpriteMaterial( { map: texture, color: this.data.glowColor, opacity: this.data.glowOpacity, transparent: true, blending: THREE.AdditiveBlending } );
-        material.depthWrite = false;
-        const sprite = new THREE.Sprite( material );
-        const scalar = 25 * this.data.glowScalar;
-        sprite.scale.set(scalar, scalar, scalar);
-        this.el.object3D.add(sprite);
+        if(this.data.glow){
+            const texture = new THREE.TextureLoader().load( 'assets/sprites/glow.png' );
+            const material = new THREE.SpriteMaterial( { map: texture, color: this.data.glowColor, opacity: this.data.glowOpacity, transparent: true, blending: THREE.AdditiveBlending } );
+            material.depthWrite = false;
+            const sprite = new THREE.Sprite( material );
+            const scalar = 25 * this.data.glowScalar;
+            sprite.scale.set(scalar, scalar, scalar);
+            this.el.object3D.add(sprite);
+        }
     }
   });
 
