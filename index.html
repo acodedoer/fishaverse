@@ -22,50 +22,52 @@
           <a-asset-item id="shark-model" src="assets/models/shark.glb"></a-asset-item>
           <a-asset-item id="whale-model" src="assets/models/whale.glb"></a-asset-item>
 
-          <a-mixin id="fish3" modify-materials  gltf-model="#fish3-model" illuminate="matColor:#ff00ff; glowColor:#ff00ff;matOpacity:1; glowOpacity:0.05" animation-mixer scale="0.2 0.2 0.2"  material="color:#9c6644"></a-mixin>
+          <!--Clownfish Mixins -->
+          <a-mixin id="orange-clownfish" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#ff3503; glowColor:#ff3503; matOpacity:1; glowOpacity:0.1" animation-mixer scale=".025 .025 .025"></a-mixin>
 
-          <a-mixin id="fish1_" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#FF0000; glowColor:#FF0000; matOpacity:1; glowOpacity:0.05" animation-mixer scale=".1 .1 .1"></a-mixin>
+          <a-mixin id="red-clownfish" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#ff073a; glowColor:#ff073a; matOpacity:1; glowOpacity:0.1" animation-mixer scale=".01 .01 .01"></a-mixin>
 
-          <a-mixin id="fish1" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#FF5200; glowColor:#FF5200; matOpacity:1; glowOpacity:0.05" animation-mixer scale=".1 .1 .1"></a-mixin>
+          <!--Tilapia Mixins -->
+          <a-mixin id="yellow-tilapia"  gltf-model="#fish2-model" animation-mixer scale="0.02 0.02 0.02" illuminate="matColor:#cfff04; glowColor:#cfff04;matOpacity:1; glowOpacity:0.05"  ></a-mixin>
 
-          <a-mixin id="mantaray"  gltf-model="#mantaray-model" animation-mixer scale="0.5 0.5 0.5" illuminate="matColor:#297373; glowColor:#00ffff; matOpacity:1; glowOpacity:0.08"></a-mixin>
+          <a-mixin id="red-tilapia"  gltf-model="#fish2-model" animation-mixer scale="0.02 0.02 0.02" illuminate="matColor:#ff073a; glowColor:#ff073a;matOpacity:1; glowOpacity:0.05"  ></a-mixin>
 
-          <a-mixin id="whale"  gltf-model="#whale-model"scale="3 3 3" animation-mixer  illuminate="matColor:#A0A0A0; glow:false; matOpacity:1; glowOpacity:0.08; "></a-mixin>
+          <!--Longfish Mixin -->
+          <a-mixin id="violet-longfish" modify-materials  gltf-model="#fish3-model" illuminate="matColor:#8f00f1; glowColor:#8f00f1;matOpacity:1; glowOpacity:0.05" animation-mixer scale="0.03 0.03 0.03" ></a-mixin>
+       
+          <!--Mantaray Mixin-->
+          <a-mixin id="blue-mantaray"  gltf-model="#mantaray-model" animation-mixer scale="0.5 0.5 0.5" illuminate="matColor:#297373; glowColor:#00ffff; matOpacity:1; glowOpacity:0.08"></a-mixin>
 
-          <a-mixin id="shark"  gltf-model="#shark-model" animation-mixer="timeScale:0.5" scale="0.5 0.5 0.5" illuminate="matColor:#4d0000; glow:false; matOpacity:1; glowOpacity:0.08"></a-mixin>
+          <!--Whale Mixin-->
+          <a-mixin id="whale"  gltf-model="#whale-model"scale="3 3 3" animation-mixer  illuminate="matColor:#A0A0A0; glowColor:A0A0A0; matOpacity:1; glowOpacity:0.08; "></a-mixin>
 
-
-          <a-mixin id="fish2"  gltf-model="#fish2-model" animation-mixer scale="0.1 0.1 0.1" illuminate="matColor:#54E346; glowColor:#54E346;matOpacity:1; glowOpacity:0.05"  ></a-mixin>
-
-          <a-mixin id="fish2_"  gltf-model="#fish2-model" animation-mixer scale="0.1 0.1 0.1" illuminate="matColor:#FFF338; glowColor:#FFF338;matOpacity:1; glowOpacity:0.05"  ></a-mixin>
-          
+          <!--Shark Mixin-->
+          <a-mixin id="shark"  check gltf-model="#shark-model" animation-mixer="timeScale:0.5" scale="0.5 0.5 0.5" illuminate="matColor:#4d0000; glowColor:#4d0000; matOpacity:1; glowOpacity:0.5"></a-mixin>
         </a-assets>
-<!-- 
-        <a-entity boids="agent:fish1; population:50;" ></a-entity>
-        <a-entity boids="agent:fish3;turnFactor:0.005;avoidFactor:0.005; population:100;minSeparation:1;" ></a-entity>
-        <a-entity boids="agent:fish2;turnFactor:0.005;avoidFactor:0.005; population:40;minSeparation:2;" ></a-entity>-->
         
-        <a-entity  hide-in-ar-mode environment="preset: starry;"></a-entity>
-        <a-entity boids="agent:shark; population:1; turnFactor:0.0005;posXLimit:20; negXLimit:-20; posYLimit: 10; negYLimit: 5; posZLimit: 20; negZLimit:-20;predatorLevel:9" ></a-entity>
+         <a-entity  hide-in-ar-mode environment="preset: starry;"></a-entity>
 
+        <!-- 
+        <a-box material="wireframe:true" scale="5 5 5" position="0 1.5 -2"></a-box>
+        <a-entity position="0 1.5 -2" mixin="blue-mantaray"></a-entity> -->
+        
+        <!--Clownfish School-->
+        <a-entity boids="agent:orange-clownfish; population:20;turnFactor:0.005;avoidanceFactor:0.005; posXLimit:5; negXLimit:-5; posYLimit: 2; negYLimit: 1; posZLimit: 5; negZLimit:-5;minSeparation:1;centeringFactor:0.005; speedLimit:0.1;matchingFactor:0.6;visualRange:5" ></a-entity>
 
+        <!--Tilapia School-->
+        <a-entity boids="agent:red-tilapia;turnFactor:0.05;avoidanceFactor:0.05; population:30;minSeparation:1;posXLimit:10; negXLimit:-10; posYLimit: 2; negYLimit: 1; posZLimit: 10; negZLimit:-10;centeringFactor:0.005;matchingFactor:0.1;" ></a-entity>
+
+        <!--Longfish School-->
+        <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.005;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 5;turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.5;matchingFactor:0.9" ></a-entity>
+
+        <!--Mantaray School-->
+        <a-entity boids="agent:blue-mantaray;turnFactor:0.005;avoidanceFactor:0.005; population:5;minSeparation:3;visualRange:100; posXLimit:50; negXLimit:-50; posYLimit: 40; negYLimit: 20; posZLimit: 50; negZLimit:-50" ></a-entity>
+
+        <!--Solo Shark-->
+        <a-entity check boids="agent:shark; population:1; turnFactor:0.0005;posXLimit:20; negXLimit:-20; posYLimit: 10; negYLimit: 5; posZLimit: 20; negZLimit:-20;predatorLevel:9" ></a-entity>
+
+        <!--Solo Whale-->
         <a-entity boids="agent:whale; population:1; turnFactor:0.0005;posXLimit:50; negXLimit:-50; posYLimit: 50; negYLimit: -5; posZLimit: 50; negZLimit:-50;predatorLevel:10" ></a-entity> 
-      
-        <a-entity boids="agent:mantaray;turnFactor:0.005;avoidanceFactor:0.005; population:5;minSeparation:3;visualRange:100; posXLimit:50; negXLimit:-50; posYLimit: 40; negYLimit: 20; posZLimit: 50; negZLimit:-50" ></a-entity>
-
-        <a-entity boids="agent:fish1; population:20;turnFactor:0.005;avoidanceFactor:0.005; posXLimit:60; negXLimit:-60; posYLimit: 5; negYLimit: 2; posZLimit: 60; negZLimit:-60;minSeparation:10;centeringFactor:0.05; speedLimit:0.2;matchingFactor:0.9;" ></a-entity>
-
-        <a-entity boids="agent:fish1_; population:20;turnFactor:0.005;avoidanceFactor:0.005; posXLimit:20; negXLimit:-20; posYLimit: 10; negYLimit: 2; posZLimit: 20; negZLimit:-20;minSeparation:5;centeringFactor:0.05; speedLimit:0.2;matchingFactor:0.9;" ></a-entity>
-
-        <a-entity boids="agent:fish2_;turnFactor:0.05;avoidanceFactor:0.005; population:30;minSeparation:3;posXLimit:40; negXLimit:-40; posYLimit: 10; negYLimit: 1; posZLimit: 40; negZLimit:-40;centeringFactor:0.05;matchingFactor:0.9;" ></a-entity>
-
-        <a-entity boids="agent:fish2;turnFactor:0.05;avoidanceFactor:0.005; population:20;minSeparation:4;posXLimit:80; negXLimit:-80; posYLimit: 10; negYLimit: 1; posZLimit: 80; negZLimit:-80;centeringFactor:0.05;matchingFactor:0.9;" ></a-entity>
-
-        <a-entity boids="agent:fish3;posXLimit:40; centeringFactor:0.001;negXLimit:-40; posZLimit: 40; negZLimit:-40;turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:4;matchingFactor:0.9" ></a-entity> 
-
-        
-        
-
     </a-scene>
     </body>
 </html>

@@ -44,10 +44,6 @@ AFRAME.registerComponent('boids', {
             boid.object3D.position.x=this.getRandom(this.data.negXLimit, this.data.posXLimit);
             boid.object3D.position.y=this.getRandom(this.data.negYLimit, this.data.posYLimit);
             boid.object3D.position.z=this.getRandom(this.data.negZLimit, this.data.posZLimit);
-            const scale = this.getRandom(0.5, 1.5);
-            boid.object3D.scale.x = scale;
-            boid.object3D.scale.y = scale;
-            boid.object3D.scale.z = scale;
             this.boids[i] = {
                 el: boid,
                 dx: Math.random(),
@@ -199,7 +195,7 @@ AFRAME.registerComponent('illuminate', {
             mesh.traverse(node => 
                 {
                     if (node.hasOwnProperty('material')) {
-                        node.material.transparent=true;
+                        node.material.color = new THREE.Color( this.data.matColor );
                         node.material.opacity= this.data.matOpacity;
                         node.material.emissive=new THREE.Color( this.data.matColor );
                         node.material.emissiveIntensity = this.data.matIntensity;
@@ -219,5 +215,16 @@ AFRAME.registerComponent('illuminate', {
         }
     }
   });
+
+  AFRAME.registerComponent('check', {
+      init:function () {
+        this.el.object3D.renderOrder =999;
+        this.el.object3D.onBeforeRender = function (renderer) { renderer.clearDepth(); };
+      },
+    tick: function () {
+        console.log(this.el.object3D.renderOrder)
+    }
+  });
+
 
   
