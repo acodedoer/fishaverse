@@ -1,12 +1,3 @@
-AFRAME.registerComponent('hardground', {
-    init: function(){
-        const ground = document.createElement("a-plane");
-        ground.object3D.rotation.x =Math.PI/2;
-        ground.setAttribute("scale", "10 10 10í");
-        document.querySelector("a-scene").appendChild(ground);
-        
-    },
-})
 AFRAME.registerComponent('boids', {
     schema: {
         agent:{type: 'string', default: ""},
@@ -24,7 +15,6 @@ AFRAME.registerComponent('boids', {
         matchingFactor:{type:'number', default:0.8},
         speedLimit:{type:'number', default:0.5},
         turnFactor:{type:'number', default:0.05},
-        predatorLevel: {type:'number', default:0}
     },
 
     init: function(){
@@ -53,6 +43,7 @@ AFRAME.registerComponent('boids', {
             };
             document.querySelector("a-scene").appendChild(boid);
             this.predators = document.querySelectorAll(".predator")
+            this.obstacle = document.querySelector(".obstacle")
         }
     },
 
@@ -151,17 +142,7 @@ AFRAME.registerComponent('boids', {
             velocity.divideScalar(neighbours);
             velocity.sub(boid.el.object3D.position);
             velocity.multiplyScalar(this.data.centeringFactor);
-        }
-
-        [...this.predators].forEach(predator => { 
-            if(boid.el.object3D.position.distanceTo(predator.object3D.position)<5){
-                const predatorDir = new THREE.Vector3(predator.getAttribute('data-velocity-x'), predator.getAttribute('data-velocity-y'), predator.getAttribute('data-velocity-z'));
-                const oldV = velocity.clone();
-                velocity.cross(predatorDir)
-                velocity.add(oldV)
-            }
-        });
-        
+        }        
         return velocity;
     },
 
@@ -207,6 +188,8 @@ AFRAME.registerComponent('illuminate', {
         if(this.data.glow){
             const texture = new THREE.TextureLoader().load( 'assets/sprites/glow.png' );
             const material = new THREE.SpriteMaterial( { map: texture, color: this.data.glowColor, opacity: this.data.glowOpacity, transparent: true, blending: THREE.AdditiveBlending } );
+            material.renderOrder=10000;
+            material.depthTest = false;
             material.depthWrite = false;
             const sprite = new THREE.Sprite( material );
             const scalar = 25 * this.data.glowScalar;
@@ -216,15 +199,6 @@ AFRAME.registerComponent('illuminate', {
     }
   });
 
-  AFRAME.registerComponent('check', {
-      init:function () {
-        this.el.object3D.renderOrder =999;
-        this.el.object3D.onBeforeRender = function (renderer) { renderer.clearDepth(); };
-      },
-    tick: function () {
-        console.log(this.el.object3D.renderOrder)
-    }
-  });
 
 
   
