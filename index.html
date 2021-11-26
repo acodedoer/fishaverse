@@ -13,7 +13,7 @@
     <title>Fishaverse</title>
   </head>
   <body>
-    <a-scene fog="type: exponential; color: #fff; near:5; density:0.1"  stats id="scene" >
+    <a-scene fog="type: exponential; color: #fff; near:20; density:0.05"  stats id="scene" >
       <a-entity ></a-entity>
         <a-assets>
           <a-asset-item id="fish1-model" src="assets/models/fish1.glb"></a-asset-item>
@@ -24,7 +24,7 @@
           <a-asset-item id="whale-model" src="assets/models/whale.glb"></a-asset-item>
 
           <!--Clownfish Mixins -->
-          <a-mixin id="orange-clownfish" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#ff3503; glowColor:#ff3503; matOpacity:1; glowOpacity:0.1" animation-mixer scale=".025 .025 .025"></a-mixin>
+          <a-mixin id="orange-clownfish" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#ff9933; glowColor:#ff9933; matOpacity:1; glowOpacity:0.1" animation-mixer scale=".025 .025 .025"></a-mixin>
 
           <a-mixin id="red-clownfish" modify-materials  gltf-model="#fish1-model" illuminate="matColor:#ff073a; glowColor:#ff073a; matOpacity:1; glowOpacity:0.1" animation-mixer scale=".01 .01 .01"></a-mixin>
 
@@ -59,7 +59,7 @@
         <a-entity boids="agent:red-tilapia;turnFactor:0.05;avoidanceFactor:0.05; population:30;minSeparation:1;posXLimit:10; negXLimit:-10; posYLimit: 2; negYLimit: 1; posZLimit: 10; negZLimit:-10;centeringFactor:0.005;matchingFactor:0.1;" ></a-entity>
 
         <!--Longfish School-->
-        <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.001;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 9;negYLimit:4; turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.5;matchingFactor:0.9" ></a-entity>
+        <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.001;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 9;negYLimit:2.5; turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.005;matchingFactor:0.9" ></a-entity>
 
         <!--Mantaray School-->
         <a-entity boids="agent:blue-mantaray;turnFactor:0.005;avoidanceFactor:0.005; population:5;minSeparation:3;visualRange:100; posXLimit:50; negXLimit:-50; posYLimit: 40; negYLimit: 20; posZLimit: 50; negZLimit:-50" ></a-entity>
