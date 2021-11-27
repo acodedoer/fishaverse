@@ -13,7 +13,7 @@
     <title>Fishaverse</title>
   </head>
   <body>
-    <a-scene  fog="type: exponential; color: #fff; near:20; density:0.04"  stats id="scene" >
+    <a-scene  fog="type: exponential; color: #fff; near:20; density:0.02"  stats id="scene" >
       <a-entity ></a-entity>
         <a-assets>
           <a-asset-item id="fish1-model" src="assets/models/fish1.glb"></a-asset-item>
@@ -34,7 +34,7 @@
           <a-mixin id="red-tilapia"  gltf-model="#fish2-model" animation-mixer scale="0.02 0.02 0.02" illuminate="matColor:#ff073a; glowColor:#ff073a;matOpacity:1; glowOpacity:0.05"  ></a-mixin>
 
           <!--Longfish Mixin -->
-          <a-mixin id="violet-longfish" modify-materials  gltf-model="#fish3-model" illuminate="matColor:#8f00f1; glowColor:#8f00f1;matOpacity:1; glowOpacity:0.05" animation-mixer scale="0.03 0.03 0.03" ></a-mixin>
+          <a-mixin id="violet-longfish" modify-materials  gltf-model="#fish3-model" illuminate="matColor:#8f00f1; glowColor:#8f00f1;matOpacity:1; glowOpacity:0.05" animation-mixer scale="0.06 0.06 0.06" ></a-mixin>
        
           <!--Mantaray Mixin-->
           <a-mixin id="blue-mantaray"  gltf-model="#mantaray-model" animation-mixer scale="0.5 0.5 0.5" illuminate="matColor:#297373; glowColor:#00ffff; matOpacity:1; glowOpacity:0.08"></a-mixin>
@@ -59,7 +59,7 @@
          <a-entity boids="agent:red-tilapia;turnFactor:0.05;avoidanceFactor:0.05; population:30;minSeparation:1;posXLimit:10; negXLimit:-10; posYLimit: 2; negYLimit: 1; posZLimit: 10; negZLimit:-10;centeringFactor:0.005;matchingFactor:0.1;" ></a-entity>
 
         <!--Longfish School-->
-        <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.001;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 9;negYLimit:2.5; turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.005;matchingFactor:0.9" ></a-entity>
+        <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.001;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 9;negYLimit:5; turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.005;matchingFactor:0.9" ></a-entity>
 
         <!--Mantaray School-->
         <a-entity boids="agent:blue-mantaray;turnFactor:0.005;avoidanceFactor:0.005; population:5;minSeparation:3;visualRange:100; posXLimit:50; negXLimit:-50; posYLimit: 40; negYLimit: 20; posZLimit: 50; negZLimit:-50" ></a-entity>
