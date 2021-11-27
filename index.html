@@ -13,7 +13,7 @@
     <title>Fishaverse</title>
   </head>
   <body>
-    <a-scene fog="type: exponential; color: #fff; near:20; density:0.05"  stats id="scene" >
+    <a-scene  fog="type: exponential; color: #fff; near:20; density:0.04"  stats id="scene" >
       <a-entity ></a-entity>
         <a-assets>
           <a-asset-item id="fish1-model" src="assets/models/fish1.glb"></a-asset-item>
@@ -46,17 +46,17 @@
           <a-mixin id="shark"  check gltf-model="#shark-model" animation-mixer="timeScale:0.5" scale="0.7 0.7 0.7" illuminate="matColor:#4d0000; glow:false; matOpacity:1; glowOpacity:0.5"></a-mixin>
         </a-assets>
         
-         <a-entity hide-in-ar-mode environment="preset: starry;lightPosition: 0 -10 -100;"></a-entity>
-        <!-- <a-plane hardground material="depthTest:false" scale="100 100 100" rotation="-90 0 0"></a-plane> -->
-        <!-- 
-        <a-box material="wireframe:true" scale="5 5 5" position="0 1.5 -2"></a-box>
-        <a-entity position="0 1.5 -2" mixin="blue-mantaray"></a-entity> -->
+         <a-entity hide-in-ar-mode environment="preset: yavapai;skyType:atmosphere; lightPosition:0 1 -0.2"></a-entity> 
         
         <!--Clownfish School-->
-        <a-entity boids="agent:orange-clownfish; population:20;turnFactor:0.005;avoidanceFactor:0.005; posXLimit:5; negXLimit:-5; posYLimit: 2; negYLimit: 1; posZLimit: 5; negZLimit:-5;minSeparation:1;centeringFactor:0.005; speedLimit:0.1;matchingFactor:0.6;visualRange:5" ></a-entity>
+        <a-entity boids="agent:orange-clownfish; population:20;turnFactor:0.005;avoidanceFactor:0.01; posXLimit:5; negXLimit:-5; posYLimit: 2; negYLimit: 1; posZLimit: 5; negZLimit:-5;minSeparation:1;centeringFactor:0.005; speedLimit:0.1;matchingFactor:0.6;visualRange:5" ></a-entity>
+
+        <a-entity boids="agent:orange-clownfish; population:20;turnFactor:0.005;avoidanceFactor:0.01; posXLimit:5; negXLimit:-5; posYLimit: 2; negYLimit: 1; posZLimit: 5; negZLimit:-5;minSeparation:1;centeringFactor:0.005; speedLimit:0.1;matchingFactor:0.6;visualRange:5" ></a-entity>
 
         <!--Tilapia School-->
         <a-entity boids="agent:red-tilapia;turnFactor:0.05;avoidanceFactor:0.05; population:30;minSeparation:1;posXLimit:10; negXLimit:-10; posYLimit: 2; negYLimit: 1; posZLimit: 10; negZLimit:-10;centeringFactor:0.005;matchingFactor:0.1;" ></a-entity>
+
+         <a-entity boids="agent:red-tilapia;turnFactor:0.05;avoidanceFactor:0.05; population:30;minSeparation:1;posXLimit:10; negXLimit:-10; posYLimit: 2; negYLimit: 1; posZLimit: 10; negZLimit:-10;centeringFactor:0.005;matchingFactor:0.1;" ></a-entity>
 
         <!--Longfish School-->
         <a-entity boids="agent:violet-longfish;posXLimit:20; centeringFactor:0.001;negXLimit:-20; posZLimit: 20; negZLimit:-20;posYLimit: 9;negYLimit:2.5; turnFactor:0.005;avoidFactor:0.005; population:60;minSeparation:0.005;matchingFactor:0.9" ></a-entity>
